@@ -59,7 +59,7 @@ E-Commerce Web Application for All Your Building Needs
         @override
         Widget build(BuildContext context) {
         return Scaffold(
-            ... // jangan copy titik-titik ini!
+            ... 
         );
         }
     }
