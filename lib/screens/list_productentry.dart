@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intijayamobile/models/product_entry.dart';
 import 'package:intijayamobile/widgets/left_drawer.dart';
+import 'package:intijayamobile/screens/detail_product.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -58,10 +59,20 @@ class _ProductEntryPageState extends State<ProductEntryPage> {
                   margin:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   padding: const EdgeInsets.all(20.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 4.0,
+                      ),
+                    ],
+                  ),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // Menampilkan nama produk
                       Text(
                         "${snapshot.data![index].fields.name}",
                         style: const TextStyle(
@@ -70,16 +81,32 @@ class _ProductEntryPageState extends State<ProductEntryPage> {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      Text("${snapshot.data![index].fields.name}"),
+                      // Menampilkan harga produk
+                      Text(
+                        "Price: ${snapshot.data![index].fields.price}",
+                        style: const TextStyle(fontSize: 16.0),
+                      ),
                       const SizedBox(height: 10),
-                      Text("${snapshot.data![index].fields.description}"),
+                      // Menampilkan deskripsi produk
+                      Text(
+                        "Description: ${snapshot.data![index].fields.description}",
+                        style: const TextStyle(fontSize: 16.0),
+                      ),
                       const SizedBox(height: 10),
-                      Text("${snapshot.data![index].fields.price}"),
-                      const SizedBox(height: 10),
-                      Text("${snapshot.data![index].fields.quantity}"),
-                      const SizedBox(height: 10),
-                      Text("${snapshot.data![index].fields.categories}"),
-          
+                      // Tombol untuk navigasi ke halaman detail
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProductDetailPage(
+                                product: snapshot.data![index],
+                              ),
+                            ),
+                          );
+                        },
+                        child: const Text('Lihat Detail Produk'),
+                      ),
                     ],
                   ),
                 ),
